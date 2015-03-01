@@ -1,9 +1,16 @@
-jquery.Table
-============
+# jquery.Table
 
-JQuery plugin for table data management, input and manipulation. Supports inline editing, formula based calculations, data typing, value formatting and keyboard navigation. 
+jquery.Table is a easy to use JQuery based plugin for table data management and manipulation. 
 
-Example:
+### Supports
+
+- Inline editing
+- formula based calculations
+- Data typing
+- Value formatting
+- Keyboard navigation
+
+### Example
 ```html
 <!DOCTYPE html>
 <html lang="en">
@@ -62,6 +69,8 @@ Example:
                 ['2015-02-04', '47017', '', '236.81', '', '']
                 
             ],
+            // Position table rows
+            position: "top",
             // Enable debug output to console
             debug: true
         });
@@ -73,7 +82,7 @@ Example:
 
             // Add row
             $("button#addrow").on("click", function() {
-                t.addRow({ "position": "top" });
+                t.addRow();
             });
 
             // Serialize
@@ -94,3 +103,8 @@ Example:
 </body>
 </html>
 ```
+
+### License
+
+jquery.Table is released under the MIT License. See included LICENSE file for
+details.
