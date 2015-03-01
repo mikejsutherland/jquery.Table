@@ -5,7 +5,7 @@ jquery.Table is a easy to use JQuery based plugin for table data management and 
 ### Supports
 
 - Inline editing
-- formula based calculations
+- Formula based calculations
 - Data typing
 - Value formatting
 - Keyboard navigation
