@@ -10,6 +10,8 @@ function Table (o) {
     this.data = s.data || [];
     // Fields as Key Objects pairs
     this.fields = s.fields || {};
+    // Position
+    this.position = s.position || "bottom";
 
     this.log("Initializing Table"+this.id);
     this._init();
@@ -635,7 +637,7 @@ Table.prototype.addRow = function(o) {
 
     var o = o || {};
     var row = o.data || undefined;
-    var pos = o.position || "bottom";
+    var pos = o.position || self.position;
 
     // Create the tbody if necessary
     if ( ! $("table"+this.id).find("tbody").length ) {
@@ -648,12 +650,12 @@ Table.prototype.addRow = function(o) {
 
     // Create row at position
     if ( pos == "bottom" ) {
-        $("table"+this.id+" > tbody:last")
-            .append('<tr />').attr(rowAttr);    
+        var rowEl = $('<tr />').attr(rowAttr);
+        $("table"+this.id+" > tbody:last").append(rowEl);    
     }
     else {
-        $('<tr />').attr(rowAttr)
-            .prependTo("table"+this.id+" > tbody:last");
+        var rowEl = $('<tr />').attr(rowAttr);
+        $(rowEl).prependTo("table"+this.id+" > tbody:last");
     }
 
     // Populate the row with cells
@@ -712,7 +714,7 @@ Table.prototype.render = function() {
     //
     for (var i=0; i<this.data.length; i++) {
 
-        this.addRow({ "data": this.data[i], "position": "top" });
+        this.addRow({ "data": this.data[i], "position": self.position });
     }
 
     // Calculate formula based cells
