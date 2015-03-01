@@ -243,8 +243,6 @@ Table.prototype._events = function() {
                     self.saveCell(cid);
                 });
             }
-
-            //self.renderCalc();
         }
     }).on('keydown', function(event) {
 
@@ -298,8 +296,6 @@ Table.prototype._events = function() {
                     break;
             }
         }
-
-        //self.renderCalc();
     });
 }
 
@@ -421,7 +417,6 @@ Table.prototype._gettype = function(id) {
     if ( $("td#"+id) ) {
 
         var pos = this._position(id);
-        //this.log(pos);
 
         var c = 0;
         for (field in this.fields) {
@@ -439,7 +434,6 @@ Table.prototype._getfield = function(id) {
     if ( $("td#"+id) ) {
 
         var pos = this._position(id);
-        //this.log(pos);
 
         var c = 0;
         for (field in this.fields) {
@@ -711,7 +705,7 @@ Table.prototype.render = function() {
     // Re add the header
     this.renderHead();
 
-    //
+    // Add a row for each data set
     for (var i=0; i<this.data.length; i++) {
 
         this.addRow({ "data": this.data[i], "position": self.position });
@@ -752,8 +746,6 @@ Table.prototype.serialize = function() {
 
         data.push(row);
     });
-
-    //self.data = data;
 
     return data;
 }
