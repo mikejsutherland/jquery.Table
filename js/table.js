@@ -638,6 +638,15 @@ Table.prototype.addRow = function(o) {
         $("table"+this.id).append('<tbody />');
     }
 
+    // Convert object to an array
+    if ( row === Object(row) ) {
+        var rdata = [];
+        for (var key in row) {
+            rdata.push(row[key]);
+        }
+        row = rdata;
+    }
+
     var r = this._count("rows");
     var rid = this._id()+'_'+r;
     var rowAttr = { "id": rid };
