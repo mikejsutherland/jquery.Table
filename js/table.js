@@ -741,7 +741,7 @@ Table.prototype.serialize = function() {
 
     $("table"+this.id+" > tbody > tr").each(function () {
 
-        var row = [];
+        var row = {};
 
         $(this).children("td").each(function () {
 
@@ -749,9 +749,7 @@ Table.prototype.serialize = function() {
             var field = self._getfield(cid);
             var val = $(this).text() || "";
 
-            var o = {};
-            o[field] = val;
-            row.push(o);
+            row[field] = val;
         });
 
         data.push(row);
