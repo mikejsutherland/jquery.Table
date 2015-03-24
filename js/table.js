@@ -10,8 +10,8 @@ function Table (o) {
     this.data = s.data || [];
     // Fields as Key Objects pairs
     this.fields = s.fields || {};
-    // Position
-    this.position = s.position || "bottom";
+    // Direction
+    this.direction = s.direction || "asc";
 
     this.log("Initializing Table"+this.id);
     this._init();
@@ -631,7 +631,7 @@ Table.prototype.addRow = function(o) {
 
     var o = o || {};
     var row = o.data || undefined;
-    var pos = o.position || self.position;
+    var dir = o.direction || self.direction;
 
     // Create the tbody if necessary
     if ( ! $("table"+this.id).find("tbody").length ) {
@@ -651,14 +651,18 @@ Table.prototype.addRow = function(o) {
     var rid = this._id()+'_'+r;
     var rowAttr = { "id": rid };
 
-    // Create row at position
-    if ( pos == "bottom" ) {
-        var rowEl = $('<tr />').attr(rowAttr);
-        $("table"+this.id+" > tbody:last").append(rowEl);    
-    }
-    else {
-        var rowEl = $('<tr />').attr(rowAttr);
-        $(rowEl).prependTo("table"+this.id+" > tbody:last");
+    // Add row based on direction
+    switch(dir) {
+        case "asc":
+            // Ascending, append
+            var rowEl = $('<tr />').attr(rowAttr);
+            $("table"+this.id+" > tbody:last").append(rowEl);
+            break;
+        case "desc":
+            // Descending, prepend
+            var rowEl = $('<tr />').attr(rowAttr);
+            $(rowEl).prependTo("table"+this.id+" > tbody:last");
+            break;
     }
 
     // Populate the row with cells
@@ -703,10 +707,10 @@ Table.prototype.delRow = function (id) {
     return;
 }
 
-Table.prototype.render = function(position) {
+Table.prototype.render = function(direction) {
 
     var self = this;
-    var p = position || self.position;
+    var dir = direction || self.direction;
 
     if ( ! this._isvalid() ) { return false; }
 
@@ -718,7 +722,7 @@ Table.prototype.render = function(position) {
     // Add a row for each data set
     for (var i=0; i<this.data.length; i++) {
 
-        this.addRow({ "data": this.data[i], "position": p });
+        this.addRow({ "data": this.data[i], "direction": dir });
     }
 
     // Calculate formula based cells
@@ -733,13 +737,25 @@ Table.prototype.drop = function() {
     this.removeBody();
 }
 
-Table.prototype.serialize = function() {
+Table.prototype.serialize = function(direction) {
 
     var self = this;
-    
-    var data = [];
+    var dir = direction || self.direction;
 
-    $("table"+this.id+" > tbody > tr").each(function () {
+    var data = [];
+    var rows;
+
+    // Serialize data based on table data direction
+    switch(dir) {
+        case "asc":
+            rows = $("table"+this.id+" > tbody > tr");
+            break;
+        case "desc":
+            rows = $($("table"+this.id+" > tbody > tr").get().reverse());
+            break;
+    }
+
+    $(rows).each(function () {
 
         var row = {};
 

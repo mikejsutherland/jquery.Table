@@ -70,7 +70,7 @@ jquery.Table is a easy to use JQuery based plugin for table data management and 
                 
             ],
             // Position table rows
-            position: "top",
+            direction: "desc",
             // Enable debug output to console
             debug: true
         });
