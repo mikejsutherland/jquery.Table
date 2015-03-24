@@ -703,9 +703,10 @@ Table.prototype.delRow = function (id) {
     return;
 }
 
-Table.prototype.render = function() {
+Table.prototype.render = function(position) {
 
     var self = this;
+    var p = position || self.position;
 
     if ( ! this._isvalid() ) { return false; }
 
@@ -717,7 +718,7 @@ Table.prototype.render = function() {
     // Add a row for each data set
     for (var i=0; i<this.data.length; i++) {
 
-        this.addRow({ "data": this.data[i], "position": self.position });
+        this.addRow({ "data": this.data[i], "position": p });
     }
 
     // Calculate formula based cells
