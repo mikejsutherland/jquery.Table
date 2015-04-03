@@ -74,9 +74,20 @@ Table.prototype._calc = function(id, o) {
                     val = (x * y);
                     break;
                 case "datediff":
-                    var d1 = new Date(x);
-                    var d2 = new Date(y);
+                    // IE doesn't accept dates as strings, resulting in NaN.
+                    // Instead we'll use regex to parse the string and set
+                    // the date using Date.setFullYear().
+                    var rx = /^\s*(\d{4})-(\d\d)-(\d\d)\s*$/;
+                    var xparts = rx.exec(x);
+                    var yparts = rx.exec(y);
                     var day = 24*60*60*1000;
+
+                    var d1 = new Date(NaN);
+                    var d2 = new Date(NaN);
+                    d1.setFullYear(xparts[1], (xparts[2] - 1), xparts[3]);
+                    d2.setFullYear(yparts[1], (yparts[2] - 1), yparts[3]);
+
+                    //self.log("("+ d1.getTime() +" - "+ d2.getTime() +") / "+day)
                     val = Math.round(Math.abs((d1.getTime()-d2.getTime())/(day)));
                     break;
             }
