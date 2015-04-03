@@ -702,7 +702,7 @@ Table.prototype.addRow = function(o) {
         // Append the table cell to the row
         var cellAttr = {
             "id": cid,
-            "class": cellclass,
+            "class": cellclass
         };
 
         var cell = $("<td />").attr(cellAttr).text(val);
