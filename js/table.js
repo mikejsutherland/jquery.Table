@@ -687,11 +687,11 @@ Table.prototype.addRow = function(o) {
         var dtype = this.fields[key].type || "";
         var dt = this._datatypes(dtype);
         // Set the cell class
-        var cellclass = this.fields[key].class || "";
+        var cellclass = this.fields[key]["class"] || "";
         cellclass += (dtype) ? " "+ dtype : "";
 
         // Set the default cell value
-        var val = dt.default || "";
+        var val = dt["default"] || "";
         // Set value from the provided data if any
         if ( $.isArray(row) && row.length >= (c-1) ) {
             val = row[c];
