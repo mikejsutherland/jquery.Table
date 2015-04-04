@@ -46,7 +46,8 @@ td.edit input.editcell {
     outline: none; 
 
     width: 82%;
-    height: 98%;
+    height: 55px;
+    line-height: 55px;
     margin: 0px;
     padding: 0px;
 }
