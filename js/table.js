@@ -601,8 +601,6 @@ Table.prototype.renderHead = function(fields) {
 
         // Truncate the existing data if it exists
         this.removeHead();
-        // Reset the table attributes
-        $("table"+this.id).css({width: '', height: ''});
 
         // Re add header fields
         if ( ! $("table"+this.id).find("thead").length ) {
