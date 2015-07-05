@@ -16,7 +16,7 @@ jquery.Table is a easy to use JQuery based plugin for table data management and 
 <html lang="en">
 <head>
     <meta charset="utf-8" />
-    <script type="text/javascript" src="jquery/jquery-1.11.2.min.js"></script>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
 
     <link rel="stylesheet" type="text/css" href="jquery.Table/css/table.css" />
     <script type="text/javascript" src="jquery.Table/js/table.js"></script>
@@ -90,7 +90,7 @@ jquery.Table is a easy to use JQuery based plugin for table data management and 
                 var data = t.serialize();
                 console.log(data);
             });
-        }
+        });
 
     </script>
 </head>
